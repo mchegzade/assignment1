@@ -1,0 +1,72 @@
+---
+title: "Cymon information page"
+output: pdf_document
+fontsize: 5pt 
+classoption: landscape
+geometry: margin=0.5in
+
+---
+
+This pdf provides information about the following ip <http://tweakers.net> this website provides information about technology and is used by million of dutch people, we are going to use pythong and the CYNOM API to further examen this website.
+
+First i will explain how I am using python to extract information about <http://tweakers.net> 
+
+the first step to:
+
+> Python:
+
+>  * import json     #to import JSON library
+>  + import cymon    #to impport CYMON API library
+
+The next step is to add your api key:
+
+> Python:
+
+> * api = cymon.Cymon('a24ab574029d8a3a089f992b8a1c405dd68***')
+
+the final step is to write the information into a file:
+
+> Python:
+
+> * with open('data.json', 'w') as outfile:
+> *    json.dump(api.ip_events('213.239.154.20'), outfile)
+
+As you notice there is an ip i am using the api.ip_events method in the CYMON API to get my dataset.
+
+> R code:
+
+> * The updated information on the site:
+
+```{r}
+library(jsonlite)
+data <- fromJSON('/home/mchegzade/Documents/srt411/assignment1/data.json',  flatten=TRUE)
+
+updated <- c(data$results$updated)
+description <- c(data$results$description)
+info.data <- data.frame(updated, description)
+
+head(info.data)
+
+```
+
+> R code:
+
+> * The type of danger information on the site:
+
+```{r}
+library(jsonlite)
+data <- fromJSON('/home/mchegzade/Documents/srt411/assignment1/data.json',  flatten=TRUE)
+
+created <- data$results$created
+
+title <- data$results$title
+tag <- data$results$tag
+detail <- data$results$details_url
+
+mal.data <- data.frame(created, tag, title)
+
+head(mal.data)
+
+```
+
+This concludes the basic information what Cymon API provides

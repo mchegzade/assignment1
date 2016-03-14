@@ -1,0 +1,6 @@
+#!/bin/bash
+# automated script which does Json Request and Rstudio
+
+echo "opening Rstudio"
+./get_info.py
+rstudio < information.Rmd
