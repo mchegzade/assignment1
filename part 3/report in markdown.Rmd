@@ -1,0 +1,83 @@
+---
+title: "part 3 markdown"
+output: pdf_document
+classoption: landscape
+fontsize: 8pt
+---
+
+Some R code and pdf to use with the markdown Phase 1
+
+
+```{r}
+df <- read.csv("~/Desktop/packet", header = FALSE)
+head(df)
+summary(df)
+d <- table(df$V5)
+
+#linebar plot for protocols
+plot(d,  xlab='number per protocol')
+
+```
+
+```{r}
+#phase 2 line graph
+df <- read.csv("~/Desktop/phase2", header = FALSE)
+head(df)
+summary(df)
+d <- table(df$V6)
+frame2<-as.data.frame(d)
+
+library("Sleuth2")
+library("ggplot2")
+ggplot(frame2, aes(frame2$Var1, frame2$Freq, group=1)) +
+  geom_line() +
+  geom_point(aes(size=frame2$Freq)) + 
+  theme_bw() +
+  labs(size="Reqeust size:" ) +
+  scale_size_area() + 
+  xlab("packet size:") +
+  ylab("Number of Requests") +
+  coord_flip() +
+  ggtitle("Number of length of packet counted: ")
+
+
+df <- read.csv("~/Desktop/phase2", header = FALSE)
+head(df)
+summary(df)
+d <- table(df$V4)
+frame2<-as.data.frame(d)
+print(frame2)
+library("Sleuth2")
+library("ggplot2")
+
+
+ggplot(frame2, aes(frame2$Var1, frame2$Freq, group=2)) +
+  geom_point(aes(size=frame2$Freq)) + 
+  labs(size="Reqeust size:" ) +
+  scale_size_area() + 
+  xlab("Ip address") +
+  ylab("Number of Requests") +
+  coord_flip() +
+  coord_polar("y", start=0)
+  ggtitle("Number of length of packet counted: ")
+
+#Phase 3 scatter plot
+df <- read.csv("~/Desktop/phase3", header = FALSE)
+head(df)
+summary(df)
+d <- table(df$V3)
+frame2<-as.data.frame(d)
+
+library("Sleuth2")
+library("ggplot2")
+ggplot(frame2, aes(frame2$Var1, frame2$Freq)) +
+  geom_point(aes(size=frame2$Freq)) + 
+  theme_bw() +
+  labs(size="Reqeust size:" ) +
+  scale_size_area() + 
+  xlab("IP ADDRESS") +
+  ylab("Number of Requests") +
+  coord_flip() +
+  ggtitle("Number of request of each IP source for phase 3")
+
+```
